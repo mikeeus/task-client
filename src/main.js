@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
 
 Vue.config.productionTip = false
 
@@ -11,13 +12,13 @@ Vue.use(Vuetify)
 
 Vue.use(Vuetify, {
   theme: {
-    primary: "#283593",
-    secondary: "#5C6BC0",
-    accent: "#FDD835",
-    error: "#f44336",
-    warning: "#ffeb3b",
-    info: "#2196f3",
-    success: "#4caf50"
+    primary: '#060f15',
+    secondary: '#5C6BC0',
+    accent: '#FDD835',
+    error: '#f44336',
+    warning: '#ffeb3b',
+    info: '#2196f3',
+    success: '#4caf50'
   }
 })
 
