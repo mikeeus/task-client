@@ -15,7 +15,10 @@
       <v-container fluid fill-height class="grey lighten-4">
         <v-layout>
           <v-flex shrink>
-            <router-view/>
+            <div class="background">
+              <div class="overlay"></div>
+              <router-view/>
+            </div>
           </v-flex>
         </v-layout>
       </v-container>
@@ -47,6 +50,20 @@ export default {
 
 .application {
   font-family: 'Lato', Helvetica, Arial, sans-serif;
+}
+.application .theme--light.list, .theme--light .list {
+  background: rgba(25, 118, 210, 0.87);
+}
+.application .theme--light.list .list__tile:not(.list__tile--active), .theme--light .list .list__tile:not(.list__tile--active) {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+  color: white;
+  padding: 15px;
+  height: 90px;
+}
+ul.application .theme--light.list, .theme--light .list {
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
 }
 #app {
   -webkit-font-smoothing: antialiased;
