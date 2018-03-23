@@ -1,24 +1,38 @@
 <template>
   <v-app id="inspire">
+    <v-navigation-drawer
+      fixed
+      clipped
+      class="grey lighten-4"
+      app
+      v-model="drawer">
+      <v-list
+        dense
+        class="grey lighten-4">
+        <v-list-tile>
+          <v-list-tile-content>
+            <router-link to="/">Leaderboard</router-link>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-content>
+            <router-link to="/reverser">Reverser</router-link>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+
     <v-toolbar color="primary" app absolute clipped-left>
+      <v-toolbar-side-icon @click.native="drawer = !drawer"></v-toolbar-side-icon>
       <img src="./assets/logo.png" width="100px">
       <span class="title ml-3 mr-5">Mikias Abera</span>
       <v-spacer></v-spacer>
-      <router-link to="/">
-        <v-btn>Leaderboard</v-btn>
-      </router-link>
-      <router-link to="/reverser">
-        <v-btn>Reverser</v-btn>
-      </router-link>
     </v-toolbar>
     <v-content>
       <v-container fluid fill-height class="grey lighten-4">
         <v-layout>
           <v-flex shrink>
-            <div class="background">
-              <div class="overlay"></div>
-              <router-view/>
-            </div>
+            <router-view/>
           </v-flex>
         </v-layout>
       </v-container>
@@ -57,8 +71,10 @@ export default {
 .application .theme--light.list .list__tile:not(.list__tile--active), .theme--light .list .list__tile:not(.list__tile--active) {
   border-bottom: 2px solid rgba(255, 255, 255, 0.25);
   color: white;
-  padding: 15px;
-  height: 90px;
+  @include gt-xs {
+    padding: 15px;
+    height: 90px;
+  }
 }
 ul.application .theme--light.list, .theme--light .list {
   padding: 0;

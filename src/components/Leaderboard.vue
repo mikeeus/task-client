@@ -1,26 +1,28 @@
 <template>
   <div class="container">
-    <v-progress-linear :indeterminate="true" v-if="loading">
+    <v-progress-linear :indeterminate="true" v-if="loading"
+      class="progress">
     </v-progress-linear>
 
     <v-layout row>
-      <v-btn @click="fetchLeaderboard">Leaderboard</v-btn>
-      <v-btn @click="fetchUsers">All Users</v-btn>
-      <v-btn @click="fetchScoreless">Scoreless</v-btn>
+      <v-btn :loading="loading === 'leaderboard'"
+        @click="fetchLeaderboard">Leaderboard</v-btn>
+      <v-btn :loading="loading === 'users'"
+        @click="fetchUsers">All Users</v-btn>
+      <v-btn :loading="loading === 'scoreless'"
+        @click="fetchScoreless">Scoreless</v-btn>
     </v-layout>
 
     <v-card color="primary darken-2"
       v-if="user" class="user-detail white--text">
       <v-container fluid grid-list-lg>
         <v-layout row>
-          <img :src="user.avatar" alt="Profile picture"
-            height="125px"
-            width="125px">
+          <img :src="user.avatar" alt="Profile picture">
           <v-flex>
             <div>
               <v-layout row>
                 <div class="headline">{{ user.name }}</div>
-                <div>{{ user.daily_score }}</div>
+                <div class="headline-score">{{ user.daily_score }}</div>
               </v-layout>
               <v-layout column>
                 <ul class="user-score">
@@ -60,6 +62,7 @@
         </v-list-tile-content>
         <v-list-tile-action class="score">
           {{ user.daily_score }}
+          <sup>SEK</sup>
         </v-list-tile-action>
         <v-list-tile-action>
           <v-layout row>
@@ -85,18 +88,18 @@ import axios from 'axios'
 export default {
   name: 'Leaderboard',
   methods: {
-    startLoading() {
-      this.loading = true
+    startLoading (value) {
+      this.loading = value || true
     },
-    stopLoading() {
+    stopLoading () {
       this.loading = false
     },
-    handleError(err) {
+    handleError (err) {
       this.err = err
       this.stopLoading()
     },
     fetchLeaderboard () {
-      this.startLoading()
+      this.startLoading('leaderboard')
       axios.get(this.apiUrl + 'scores')
         .then(res => {
           this.leaderboard = res.data
@@ -108,7 +111,7 @@ export default {
         })
     },
     fetchUsers () {
-      this.startLoading()
+      this.startLoading('users')
       axios.get(this.apiUrl + 'users')
         .then(res => {
           this.users = res.data
@@ -120,7 +123,7 @@ export default {
         })
     },
     fetchScoreless () {
-      this.startLoading()
+      this.startLoading('scoreless')
       axios.get(this.apiUrl + 'scoreless')
         .then(res => {
           this.scoreless = res.data
@@ -132,7 +135,7 @@ export default {
         })
     },
     selectUser (user) {
-      this.user = user
+      this.startLoading('user')
       axios.get(this.apiUrl + 'users/' + user.id)
         .then(res => {
           this.user = res.data.user
@@ -148,43 +151,84 @@ export default {
   },
   data () {
     return {
-      // apiUrl: 'https://saleskick-task-server.herokuapp.com/',
-      apiUrl: 'http://localhost:3000/',
+      apiUrl: 'https://saleskick-task-server.herokuapp.com/',
       items: [],
       leaderboard: [],
       users: [],
       scoreless: [],
       user: null,
       viewed: '',
-      err: null
-      // id, name, avatar, daily_score, daily_score_count, latest_score
+      err: null,
+      loading: true
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+@import '../styles/variables.scss';
+
+.container {
+  @include xs {
+    padding: 0;
+  }
+}
+.progress {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 100%;
+}
 .rank {
   text-align: center;
   width: 100%;
-  font-size: 28px;
-  margin-right: 10px;
+  @include gt-xs {
+    font-size: 28px;
+    margin-right: 10px;
+  }
 }
 .score {
-  font-size: 48px;
+  @include gt-xs {
+    font-size: 48px;
+    margin-right: 35px;
+    sup {
+      font-size: 15px;
+      top: -3.5em;
+      left: 2em;
+    }
+  }
 }
 .user-detail {
+  padding: 15px;
   margin-bottom: 15px;
   img {
     border-radius: 50%;
-    margin: 15px 30px;
     padding: 1px;
     border: 2px solid;
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+    @include gt-xs {
+      margin: 15px 30px;
+      height: 125px;
+      width: 125px;
+    }
+    @include xs {
+      height: 50px;
+      width: 50px;
+      margin-right: 15px;
+    }
   }
 }
 .headline {
   font-weight: bold;
+  margin-right: 15px;
+}
+.headline-score {
+  font-weight: bold;
+  line-height: 30px;
+  @include gt-xs {
+    margin-left: 20px;
+    font-size: 45px;
+  }
 }
 .user-score {
   list-style: none;

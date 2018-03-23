@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <h1>Reverser</h1>
     <v-layout row>
       <v-text-field
