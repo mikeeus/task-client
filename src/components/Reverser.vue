@@ -52,7 +52,7 @@ export default {
       axios.post(this.apiUrl, { message: this.message })
         .then(res => {
           this.reversed = res.data
-          this.history.push(this.reversed.original.data)
+          this.history = [this.reversed.original.data, ...this.history]
           this.loading = false
         }, err => {
           this.error = err
