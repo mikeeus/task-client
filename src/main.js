@@ -8,7 +8,11 @@ import 'vuetify/dist/vuetify.min.css'
 
 Vue.config.productionTip = false
 
+// Vuetify for UI components
 Vue.use(Vuetify)
+
+// Moment for formatting dates
+Vue.use(require('vue-moment'))
 
 Vue.use(Vuetify, {
   theme: {
