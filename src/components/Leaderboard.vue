@@ -5,18 +5,20 @@
     </v-progress-linear>
 
     <v-layout row>
-      <v-btn :loading="loading === 'leaderboard'"
-        @click="fetchLeaderboard">Leaderboard</v-btn>
-      <v-btn :loading="loading === 'users'"
-        @click="fetchUsers">All Users</v-btn>
-      <v-btn :loading="loading === 'scoreless'"
-        @click="fetchScoreless">Scoreless</v-btn>
+      <v-menu offset-y>
+        <v-btn color="primary" dark slot="activator">{{viewed}}</v-btn>
+        <v-list>
+          <v-list-tile v-for="item in views" :key="item.label" @click="item.clicked()">
+            <v-list-tile-title>{{ item.label }}</v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
     </v-layout>
 
     <v-card color="primary darken-2"
       v-if="user" class="user-detail white--text">
       <v-container fluid grid-list-lg>
-        <v-layout row>
+        <v-layout row wrap>
           <img :src="user.avatar" alt="Profile picture">
           <v-flex>
             <div>
@@ -54,29 +56,35 @@
         <v-list-tile-action>
           <div class="rank">{{ index + 1 }}</div>
         </v-list-tile-action>
-        <v-list-tile-avatar>
-          <img :src="user.avatar">
-        </v-list-tile-avatar>
-        <v-list-tile-content>
-          <v-list-tile-title v-html="user.name">{{ user.name }}</v-list-tile-title>
-        </v-list-tile-content>
-        <v-list-tile-action class="score">
-          {{ user.daily_score }}
-          <sup>SEK</sup>
-        </v-list-tile-action>
-        <v-list-tile-action>
-          <v-layout row>
-            <v-icon v-if="user.latest_score < 0"
-              :color="'red'">
-              arrow_downward
-            </v-icon>
-            <v-icon v-if="user.latest_score > 0"
-              :color="'green'">
-              arrow_upward
-            </v-icon>
-            <span>{{ user.latest_score }}</span>
+        <v-layout>
+          <!-- <v-layout row> -->
+            <v-list-tile-avatar>
+              <img :src="user.avatar">
+            </v-list-tile-avatar>
+            <v-list-tile-content>
+              <v-list-tile-title class="name" v-html="user.name">{{ user.name }}</v-list-tile-title>
+            </v-list-tile-content>
+          <!-- </v-layout> -->
+          <!-- <v-layout row> -->
+            <v-list-tile-action class="score">
+              {{ user.daily_score }}
+              <sup>SEK</sup>
+            </v-list-tile-action>
+            <v-list-tile-action>
+              <v-layout row>
+                <v-icon v-if="user.latest_score < 0"
+                  :color="'red'">
+                  arrow_downward
+                </v-icon>
+                <v-icon v-if="user.latest_score > 0"
+                  :color="'green'">
+                  arrow_upward
+                </v-icon>
+                <span>{{ user.latest_score }}</span>
+              </v-layout>
+            </v-list-tile-action>
           </v-layout>
-        </v-list-tile-action>
+        <!-- </v-layout> -->
       </v-list-tile>
     </v-list>
   </div>
@@ -157,6 +165,11 @@ export default {
       users: [],
       scoreless: [],
       user: null,
+      views: [
+        { label: 'Leaderboard', clicked: this.fetchLeaderboard },
+        { label: 'Scoreless', clicked: this.fetchScoreless },
+        { label: 'All Users', clicked: this.fetchUsers }
+      ],
       viewed: '',
       err: null,
       loading: true
@@ -175,7 +188,12 @@ export default {
 }
 .progress {
   position: absolute;
-  top: 50px;
+  @include gt-xs {
+    top: 50px;
+  }
+  @include xs {
+    top: 42px;
+  }
   left: 0;
   width: 100%;
 }
@@ -196,6 +214,12 @@ export default {
       top: -3.5em;
       left: 2em;
     }
+  }
+}
+.name {
+  @include gt-xs {
+    font-weight: bold;
+    font-size: 24px;
   }
 }
 .user-detail {
