@@ -73,6 +73,9 @@ export default {
   background: rgba(25, 118, 210, 0.87);
 }
 .application .theme--light.list .list__tile:not(.list__tile--active), .theme--light .list .list__tile:not(.list__tile--active) {
+  color: white;
+}
+.application .theme--light.list .list__tile:not(.list__tile--active), .theme--light .list .list__tile:not(.list__tile--active) {
   border-bottom: 2px solid rgba(255, 255, 255, 0.25);
   color: white;
   @include gt-xs {
