@@ -13,6 +13,7 @@
           </v-list-tile>
         </v-list>
       </v-menu>
+      <v-btn :loading="loading === 'generate'" @click="generate">Generate New Data</v-btn>
     </v-layout>
 
     <v-card color="primary darken-2"
@@ -155,6 +156,18 @@ export default {
         }, err => {
           this.handleError(err)
         })
+    },
+    generate () {
+      this.startLoading('generate')
+      axios.post(this.apiUrl + 'regenerate_scores', { score_count: this.score_count })
+        .then(res => {
+          this.leaderboard = res.data
+          this.items = this.leaderboard
+          this.viewed = 'Leaderboard'
+          this.stopLoading()
+        }, err => {
+          this.handleError(err)
+        })
     }
   },
   created () {
@@ -174,6 +187,7 @@ export default {
         { label: 'All Users', clicked: this.fetchUsers }
       ],
       viewed: '',
+      score_count: 50,
       err: null,
       loading: true
     }
