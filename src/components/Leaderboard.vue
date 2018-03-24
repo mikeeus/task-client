@@ -51,7 +51,7 @@
       </v-container>
     </v-card>
 
-    <v-list color="primary" subheader>
+    <v-list class="primary white--text" subheader>
       <v-subheader>{{ viewed }}</v-subheader>
       <v-list-tile class="primary white--text" avatar v-for="(user, index) in items" v-bind:key="user.id" @click="selectUser(user)">
         <v-list-tile-action>
