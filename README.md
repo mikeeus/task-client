@@ -1,6 +1,6 @@
-# saleskick-client
+# Mikias Abera Saleskick-Task: Vue Client
 
-> Client for saleskick programming task
+> Client for saleskick programming task built with [Vue.js](vuejs.org)
 
 ## Build Setup
 
