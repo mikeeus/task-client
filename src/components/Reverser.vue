@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <h1>Reverser</h1>
     <v-layout row>
       <v-text-field
@@ -64,18 +64,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .result {
-    background: white;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    h3 {
-      background: #BDBDBD;
-      padding: 10px;
-      width: 100px;
-    }
-    div {
-      margin-left: 15px;
-      line-height: 44px;
-    }
+@import '../styles/variables';
+
+.result {
+  background: $grey7;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  h3 {
+    background: $grey9;
+    padding: 10px;
+    width: 100px;
   }
+  div {
+    margin-left: 15px;
+    line-height: 44px;
+  }
+}
 </style>

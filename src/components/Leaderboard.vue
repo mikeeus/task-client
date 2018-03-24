@@ -13,7 +13,7 @@
           </v-list-tile>
         </v-list>
       </v-menu>
-      <v-btn :loading="loading === 'generate'" @click="generate">Generate New Data</v-btn>
+      <v-btn :loading="loading === 'generate'" @click="generate">New Data</v-btn>
     </v-layout>
 
     <v-card color="primary darken-2"
