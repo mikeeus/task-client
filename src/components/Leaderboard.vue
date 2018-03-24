@@ -53,42 +53,37 @@
 
     <v-list class="primary white--text" subheader>
       <v-subheader>{{ viewed }}</v-subheader>
-      <v-list-tile class="primary white--text" avatar v-for="(user, index) in items" v-bind:key="user.id" @click="selectUser(user)">
+      <v-list-tile class="primary white--text" avatar v-for="(user, index) in items" v-bind:key="user.id" @click="selectUser(user)"
+        color="primary">
         <v-list-tile-action>
           <div class="rank">{{ index + 1 }}</div>
         </v-list-tile-action>
-        <v-layout>
-          <!-- <v-layout row> -->
-            <v-list-tile-avatar>
-              <v-tooltip bottom>
-                <span>{{ user.name }}</span>
-                <img class="score-image" slot="activator" :src="user.avatar">
-              </v-tooltip>
-            </v-list-tile-avatar>
-            <v-list-tile-content>
-              <v-list-tile-title class="name" v-html="user.name">{{ user.name }}</v-list-tile-title>
-            </v-list-tile-content>
-          <!-- </v-layout> -->
-          <!-- <v-layout row> -->
-            <v-list-tile-action class="score">
-              {{ user.daily_score }}
-              <sup>SEK</sup>
-            </v-list-tile-action>
-            <v-list-tile-action>
-              <v-layout row>
-                <v-icon v-if="user.latest_score < 0"
-                  :color="'red'">
-                  arrow_downward
-                </v-icon>
-                <v-icon v-if="user.latest_score > 0"
-                  :color="'green'">
-                  arrow_upward
-                </v-icon>
-                <span>{{ user.latest_score }}</span>
-              </v-layout>
-            </v-list-tile-action>
-          </v-layout>
-        <!-- </v-layout> -->
+          <v-list-tile-avatar>
+            <v-tooltip bottom>
+              <span>{{ user.name }}</span>
+              <img class="score-image" slot="activator" :src="user.avatar">
+            </v-tooltip>
+          </v-list-tile-avatar>
+          <v-list-tile-content>
+            <v-list-tile-title class="name" v-html="user.name">{{ user.name }}</v-list-tile-title>
+          </v-list-tile-content>
+          <v-list-tile-action class="score">
+            {{ user.daily_score }}
+            <sup>SEK</sup>
+          </v-list-tile-action>
+          <v-list-tile-action>
+            <v-layout row>
+              <v-icon v-if="user.latest_score < 0"
+                :color="'red'">
+                arrow_downward
+              </v-icon>
+              <v-icon v-if="user.latest_score > 0"
+                :color="'green'">
+                arrow_upward
+              </v-icon>
+              <span>{{ user.latest_score }}</span>
+            </v-layout>
+          </v-list-tile-action>
       </v-list-tile>
     </v-list>
   </div>
