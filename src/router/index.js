@@ -9,7 +9,7 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/leaderboard',
       name: 'Leaderboard',
       component: Leaderboard
     },
@@ -17,6 +17,10 @@ export default new Router({
       path: '/reverser',
       name: 'Reverser',
       component: Reverser
+    },
+    {
+      path: '*',
+      redirect: '/leaderboard'
     }
   ]
 })

@@ -9,14 +9,18 @@
       <v-list
         dense
         class="grey lighten-4">
-        <v-list-tile>
+        <v-list-tile to="/leaderboard">
           <v-list-tile-content>
-            <router-link to="/">Leaderboard</router-link>
+            <v-list-tile-title class="primary--text">
+              Leaderboard
+            </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile>
+        <v-list-tile to="/reverser">
           <v-list-tile-content>
-            <router-link to="/reverser">Reverser</router-link>
+            <v-list-tile-title class="primary--text">
+              Reverser
+            </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
