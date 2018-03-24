@@ -53,7 +53,7 @@
 
     <v-list color="primary" subheader>
       <v-subheader>{{ viewed }}</v-subheader>
-      <v-list-tile avatar v-for="(user, index) in items" v-bind:key="user.id" @click="selectUser(user)">
+      <v-list-tile class="primary white--text" avatar v-for="(user, index) in items" v-bind:key="user.id" @click="selectUser(user)">
         <v-list-tile-action>
           <div class="rank">{{ index + 1 }}</div>
         </v-list-tile-action>
@@ -164,6 +164,7 @@ export default {
           this.leaderboard = res.data
           this.items = this.leaderboard
           this.viewed = 'Leaderboard'
+          this.user = null
           this.stopLoading()
         }, err => {
           this.handleError(err)
