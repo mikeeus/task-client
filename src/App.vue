@@ -91,5 +91,9 @@ ul.application .theme--light.list, .theme--light .list {
 .title {
   color: white;
   font-weight: 900;
+  @include xs {
+    margin: 4px 0 0 5px !important;
+    font-size: 20px !important;
+  }
 }
 </style>

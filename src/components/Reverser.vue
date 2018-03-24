@@ -25,7 +25,7 @@
     </v-layout>
     <v-layout column>
       <ul>
-        <li v-for="item in history" v-bind:key="item">{{ item }}</li>
+        <li v-for="(item, index) in history" v-bind:key="index">{{ item }}</li>
       </ul>
     </v-layout>
   </div>

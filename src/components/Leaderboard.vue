@@ -59,7 +59,10 @@
         <v-layout>
           <!-- <v-layout row> -->
             <v-list-tile-avatar>
-              <img :src="user.avatar">
+              <v-tooltip bottom>
+                <span>{{ user.name }}</span>
+                <img class="score-image" slot="activator" :src="user.avatar">
+              </v-tooltip>
             </v-list-tile-avatar>
             <v-list-tile-content>
               <v-list-tile-title class="name" v-html="user.name">{{ user.name }}</v-list-tile-title>
@@ -221,6 +224,9 @@ export default {
     font-weight: bold;
     font-size: 24px;
   }
+  @include xs {
+    display: none;
+  }
 }
 .user-detail {
   padding: 15px;
@@ -262,6 +268,11 @@ export default {
       padding: 0 5px;
       width: 50px;
     }
+  }
+}
+.score-image {
+  @include xs {
+    margin-top: 15px;
   }
 }
 </style>
